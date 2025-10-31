@@ -20,7 +20,7 @@ function App() {
          <Header />
         <MainContent />
        
-        <UserProfile name="Anthony Gudu" age= "30" bio="Loves to travel and explorer cities." />
+        <UserProfile  name="Alice" age="25" bio="Loves hiking and photography" />
       </div>
        <Footer />
     </>
