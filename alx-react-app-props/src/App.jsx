@@ -4,11 +4,13 @@ import UserContext from './components/UserContext';
 import Footer from './components/Footer';
 
 import './App.css'
-import { GestureProvider } from './../../alx-react-app-new/node_modules/@types/react/experimental.d';
+
 import ProfilePage from './components/ProfilePage';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [userData, setUserData] = useState({ name: "John Doe", email: "john@example.com" });
+  
 
   return (
     <>
