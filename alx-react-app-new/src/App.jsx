@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import WelcomeMessage from './components/WelcomeMessage';
-import Header from './components/Header';
-import MainContent from './components/MainContent';
+import Counter from './components/Counter';
+
+
 import Footer from './components/Footer';
-import UserProfile from './components/UserProfile'; 
+
 import './App.css'
 
 function App() {
@@ -17,10 +16,10 @@ function App() {
        
       <div className="logos">
         <WelcomeMessage />
-         <Header />
-        <MainContent />
+      <Counter />
+      
        
-        <UserProfile  name="Alice" age="25" bio="Loves hiking and photography" />
+      
       </div>
        <Footer />
     </>
