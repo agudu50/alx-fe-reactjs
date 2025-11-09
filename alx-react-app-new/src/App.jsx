@@ -1,23 +1,17 @@
 import { useState } from 'react'
- main
 import WelcomeMessage from './components/WelcomeMessage';
 import Counter from './components/Counter';
 
-=======
-import UserContext from './components/UserContext'; main
 
 import Footer from './components/Footer';
 
 import './App.css'
-import { GestureProvider } from './../../alx-react-app-new/node_modules/@types/react/experimental.d';
-import ProfilePage from './components/ProfilePage';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-main
       
        
       <div className="logos">
@@ -27,11 +21,6 @@ main
        
       
       </div>
-=======
-      <UserContext.GestureProvider>
-       <ProfilePage userData={{ name, email }} />
-      </UserContext.GestureProvider>
-main
        <Footer />
     </>
   )
