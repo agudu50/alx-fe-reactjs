@@ -14,8 +14,8 @@ function App() {
 
   return (
     <>
-      <UserContext.GestureProvider>
-       <ProfilePage userData={{ name, email }} />
+      <UserContext.GestureProvider value={userData}>
+       <ProfilePage />
       </UserContext.GestureProvider>
        <Footer />
     </>
