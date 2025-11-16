@@ -38,9 +38,12 @@ const useRecipeStore = create((set) => ({
 
   // Favorites
   addFavorite: (recipeId) =>
-    set((state) => ({
-      favorites: [...state.favorites, recipeId],
-    })),
+  set((state) => ({
+    favorites: state.favorites.includes(recipeId)
+      ? state.favorites
+      : [...state.favorites, recipeId],
+  })),
+
 
   removeFavorite: (recipeId) =>
     set((state) => ({
