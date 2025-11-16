@@ -1,34 +1,33 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-const useRecipeStore = create(set => ({
+const useRecipeStore = create((set) => ({
   recipes: [],
-   filteredRecipes: [],
-  searchTerm: '',
+  favorites: [],
+  recommendations: [],
 
-  
-  
+  // CRUD actions
+  addRecipe: (newRecipe) =>
+    set((state) => ({
+      recipes: [...state.recipes, newRecipe],
+    })),
 
-  // Add new recipe
-  addRecipe: (newRecipe) => set(state => ({ recipes: [...state.recipes, newRecipe] })),
-
-  // Update an existing recipe
   updateRecipe: (updatedRecipe) =>
-    set(state => ({
-      recipes: state.recipes.map(r =>
+    set((state) => ({
+      recipes: state.recipes.map((r) =>
         r.id === updatedRecipe.id ? updatedRecipe : r
       ),
     })),
 
-  // Delete a recipe by ID
   deleteRecipe: (id) =>
-    set(state => ({
-      recipes: state.recipes.filter(r => r.id !== id),
+    set((state) => ({
+      recipes: state.recipes.filter((r) => r.id !== id),
     })),
 
-  // Set the entire list (optional)
   setRecipes: (recipes) => set({ recipes }),
 
-  // Search/Filter actions
+  // Search & Filter
+  searchTerm: '',
+  filteredRecipes: [],
   setSearchTerm: (term) =>
     set((state) => {
       const filtered = state.recipes.filter((recipe) =>
@@ -36,6 +35,27 @@ const useRecipeStore = create(set => ({
       );
       return { searchTerm: term, filteredRecipes: filtered };
     }),
-}))
+
+  // Favorites
+  addFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: [...state.favorites, recipeId],
+    })),
+
+  removeFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: state.favorites.filter((id) => id !== recipeId),
+    })),
+
+  // Recommendations (mock logic)
+  generateRecommendations: () =>
+    set((state) => {
+      const recommended = state.recipes.filter(
+        (recipe) =>
+          state.favorites.includes(recipe.id) && Math.random() > 0.5
+      );
+      return { recommendations: recommended };
+    }),
+}));
 
 export { useRecipeStore };
