@@ -1,8 +1,8 @@
 import { useRecipeStore } from './recipeStore';
 import { Link } from 'react-router-dom';
 
-const FavoritesList = () => {
-  const favorites = useRecipeStore((state) =>
+const FavouritesList = () => {
+  const favourites = useRecipeStore((state) =>
     state.favorites
       .map((id) => state.recipes.find((recipe) => recipe.id === id))
       .filter(Boolean)
@@ -10,9 +10,9 @@ const FavoritesList = () => {
 
   return (
     <div>
-      <h2>My Favorites</h2>
-      {favorites.length === 0 && <p>No favorites yet.</p>}
-      {favorites.map((recipe) => (
+      <h2>My Favourites</h2>
+      {favourites.length === 0 && <p>No favourites yet.</p>}
+      {favourites.map((recipe) => (
         <div key={recipe.id} style={{ marginBottom: '10px' }}>
           <h3>
             <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
@@ -24,4 +24,4 @@ const FavoritesList = () => {
   );
 };
 
-export default FavoritesList;
+export default FavouritesList;
