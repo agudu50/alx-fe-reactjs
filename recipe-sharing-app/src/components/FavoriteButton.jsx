@@ -18,7 +18,7 @@ const FavoriteButton = ({ recipeId }) => {
 
   return (
     <button onClick={handleClick} style={{ marginLeft: '10px' }}>
-      {isFavorite ? '★ Remove Favorite' : '☆ Add to Favorites'}
+      {isFavorite ? ' Remove Favorite' : ' Add to Favorites'}
     </button>
   );
 };
