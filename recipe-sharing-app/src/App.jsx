@@ -1,19 +1,27 @@
-import { useState } from 'react'
-import RecipeList from './components/RecipeList'
-import AddRecipeForm from './components/AddRecipeForm'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import AddRecipeForm from "./components/AddRecipeForm";
+import RecipeList from "./components/RecipeList";
+import RecipeDetails from "./components/RecipeDetails";
 
 function App() {
-
-
   return (
     <div style={{ padding: "20px" }}>
       <h1>Recipe App</h1>
 
-      <AddRecipeForm />
-      <RecipeList />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <AddRecipeForm />
+              <RecipeList />
+            </>
+          }
+        />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
