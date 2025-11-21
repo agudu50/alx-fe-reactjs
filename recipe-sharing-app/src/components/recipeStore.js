@@ -15,6 +15,9 @@ const useRecipeStore = create((set) => ({
   deleteRecipe: (id) =>
     set((state) => ({ recipes: state.recipes.filter((r) => r.id !== id) })),
 
+  // Replace entire recipes list (useful when loading from API or resetting)
+  setRecipes: (recipes) => set({ recipes }),
+
   // Search & Filter
   searchTerm: '',
   filteredRecipes: [],
