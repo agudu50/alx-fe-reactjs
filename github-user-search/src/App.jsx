@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Search from './components/Search'
-import { fetchUserData } from './services/githubServices'
+import { fetchUserData } from './services/githubService'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'

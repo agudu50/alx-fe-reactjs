@@ -8,7 +8,7 @@ const Search = ({onSearch}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (userName.trim() === "")
+        if (!userName.trim())
             return;
 
         //Passing the username to the parent component
@@ -19,7 +19,7 @@ const Search = ({onSearch}) => {
     };
 
      return (
-    <div>
+    
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -30,7 +30,7 @@ const Search = ({onSearch}) => {
 
         <button type="submit">Search</button>
       </form>
-    </div>
+    
   );
 
 }
