@@ -1,8 +1,30 @@
-import axios from 'axios';
+import axios from "axios";
 
-//Fecting Github user data by username
-export const fetchUserData = async(userName) => {
-    const url = `https://api.github.com/users/${userName}`;
-    const response = await axios.get(url);
-    return response.data;
-}
+export const fetchUserData = async (userName, location, minRepo) => {
+  // Build the search query dynamically
+  let query = "";
+
+  // Username (text search)
+  if (userName) {
+    query += `${userName} `;
+  }
+
+  // Location filter
+  if (location) {
+    query += `location:${location} `;
+  }
+
+  // Minimum repositories
+  if (minRepo) {
+    query += `repos:>=${minRepo} `;
+  }
+
+  const url = `https://api.github.com/search/users?q=${encodeURIComponent(
+    query.trim()
+  )}`;
+
+  const response = await axios.get(url);
+
+  // Search API returns an array of users inside items[]
+  return response.data.items;
+};

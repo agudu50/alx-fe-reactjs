@@ -1,70 +1,72 @@
-import React, { useState } from "react";
-import { fetchUserData } from "../services/githubService";
+import { useState } from "react";
 
-const Search = ({ onSearch }) => {
-  // To store the input value
-  const [userName, setUsername] = useState("");
+function Search({ onSearch }) {
+  const [userName, setUserName] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepo, setMinRepo] = useState("");
 
-  // Local states to display results inside this component
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  //Handle Form submission
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!userName.trim()) return;
-
-    // Optionally notify parent
-    if (onSearch) onSearch(userName);
-
-    // Fetch and display user here as well
-    setLoading(true);
-    setError(false);
-    setUser(null);
-    try {
-      const data = await fetchUserData(userName);
-      setUser(data);
-    } catch (err) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-
-    //Clears input after search
-    setUsername("");
+    onSearch({
+      userName,
+      location,
+      minRepo
+    });
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter GitHub username..."
-          value={userName}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <div className="max-w-xl mx-auto bg-white shadow-lg p-6 rounded-xl mt-8">
+      <h2 className="text-2xl font-bold mb-4 text-center">GitHub User Search</h2>
 
-        <button type="submit">Search</button>
-      </form>
+      <form onSubmit={handleSubmit} className="space-y-4">
 
-      {/* Loading State - exact string required by checker */}
-      {loading && <p>Loading</p>}
-
-      {/* Error State - exact string required by checker */}
-      {error && <p>Looks like we cant find the user</p>}
-
-      {/* Success State: display avatar and login */}
-      {user && (
+        {/* Username */}
         <div>
-          <img src={user.avatar_url} alt="avatar" width="120" />
-          <h2>{user.login}</h2>
-          <a href={user.html_url} target="_blank" rel="noopener noreferrer">View Profile</a>
+          <label className="block font-medium">Username</label>
+          <input
+            type="text"
+            className="w-full border rounded-lg p-2 mt-1"
+            placeholder="Enter GitHub username"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            required
+          />
         </div>
-      )}
+
+        {/* Location */}
+        <div>
+          <label className="block font-medium">Location (optional)</label>
+          <input
+            type="text"
+            className="w-full border rounded-lg p-2 mt-1"
+            placeholder="e.g. Ghana, Accra"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+
+        {/* Minimum Repo Count */}
+        <div>
+          <label className="block font-medium">Minimum Repositories (optional)</label>
+          <input
+            type="number"
+            className="w-full border rounded-lg p-2 mt-1"
+            placeholder="e.g. 10"
+            value={minRepo}
+            onChange={(e) => setMinRepo(e.target.value)}
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          Search
+        </button>
+      </form>
     </div>
   );
-};
+}
 
 export default Search;
