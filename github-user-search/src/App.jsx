@@ -41,14 +41,14 @@ function App() {
             <img
               src={user.avatar_url}
               alt="avatar"
-              className="w-20 h-20 rounded-full mx-auto"
+              className="w-10 h-10 rounded-full mx-auto"
             />
             <h3 className="text-center font-semibold mt-2">{user.login}</h3>
             <a
               href={user.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center text-blue-600 underline mt-1"
+              className="block text-center text-blue-300 underline mt-1"
             >
               View Profile
             </a>

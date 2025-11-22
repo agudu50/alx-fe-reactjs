@@ -4,15 +4,20 @@ function Search({ onSearch }) {
   const [userName, setUserName] = useState("");
   const [location, setLocation] = useState("");
   const [minRepo, setMinRepo] = useState("");
+  const [results, setResults] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    onSearch({
+    // await parent handler in case it returns a promise with data
+    const res = await onSearch({
       userName,
       location,
-      minRepo
+      minRepo,
     });
+
+    // store result for local display if provided
+    if (res) setResults((prev) => [res, ...prev]);
   };
 
   return (
@@ -60,11 +65,22 @@ function Search({ onSearch }) {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          className="w-full bg-blue-600 mt-4 text-white py-2 rounded-lg hover:bg-blue-200 transition"
         >
           Search
         </button>
       </form>
+      {/* render results if any (uses && and map) */}
+      {results.length > 0 && (
+        <div className="mt-6 space-y-4">
+          {results.map((r, idx) => (
+            <div key={idx} className="p-3 border rounded">
+              <p className="font-medium">{r.userName || r.login || 'Result'}</p>
+              <p className="text-sm text-gray-600">{r.location || r.html_url || ''}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
