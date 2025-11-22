@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { fetchUserData } from "../services/githubService";
 
 function Search({ onSearch }) {
   const [userName, setUserName] = useState("");
@@ -9,15 +10,18 @@ function Search({ onSearch }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // await parent handler in case it returns a promise with data
-    const res = await onSearch({
-      userName,
-      location,
-      minRepo,
-    });
+    // use local API helper to perform advanced search
+    const items = await fetchUserData(userName, location, minRepo);
 
-    // store result for local display if provided
-    if (res) setResults((prev) => [res, ...prev]);
+    // store search results (array) for local display
+    if (Array.isArray(items) && items.length > 0) {
+      setResults((prev) => [...items, ...prev]);
+    } else {
+      setResults([]);
+    }
+
+    // still notify parent if provided (preserve previous contract)
+    if (onSearch) onSearch({ userName, location, minRepo });
   };
 
   return (
