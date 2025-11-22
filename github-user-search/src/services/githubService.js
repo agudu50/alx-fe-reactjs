@@ -16,7 +16,7 @@ export const fetchUserData = async (userName, location, minRepo) => {
 
   // Minimum repositories
   if (minRepo) {
-    query += `repos:>=${minRepo} `;
+    query += `repos:>=${minRepos} `;
   }
 
   const url = `https://api.github.com/search/users?q=${encodeURIComponent(
