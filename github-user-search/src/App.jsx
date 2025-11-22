@@ -33,7 +33,7 @@ function App() {
     {loading && <p>Loading...</p>}
     
     {/* Error State */}
-    {error && <p>Looks like we can't find the user. Please try again.</p>}
+    {error && <p>Looks like we can't find the user</p>}
 
     {/*Success State */}
     {user && (
