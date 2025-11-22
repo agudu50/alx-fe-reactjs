@@ -35,7 +35,7 @@ function App() {
       {error && <p className="text-red-500 mt-4">Looks like we cant find the user</p>}
 
       {/* Results */}
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
         {users.map((user) => (
           <div key={user.id} className="p-4 border rounded shadow bg-white">
             <img
