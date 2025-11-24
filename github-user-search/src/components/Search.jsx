@@ -4,7 +4,7 @@ import { fetchUserData } from "../services/githubService";
 function Search({ onSearch }) {
   const [userName, setUserName] = useState("");
   const [location, setLocation] = useState("");
-  const [minRepo, setMinRepo] = useState("");
+  const [minRepos, setMinRepos] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -17,7 +17,7 @@ function Search({ onSearch }) {
 
     try {
       // use local API helper to perform advanced search
-      const items = await fetchUserData(userName, location, minRepo);
+      const items = await fetchUserData(userName, location, minRepos);
 
       // store search results (array) for local display
       if (Array.isArray(items) && items.length > 0) {
@@ -28,7 +28,7 @@ function Search({ onSearch }) {
       setSearched(true);
 
       // still notify parent if provided (preserve previous contract)
-      if (onSearch) onSearch({ userName, location, minRepo });
+      if (onSearch) onSearch({ userName, location, minRepos });
     } catch (err) {
       setResults([]);
       setSearched(true);
@@ -75,8 +75,8 @@ function Search({ onSearch }) {
             type="number"
             className="w-full border rounded-lg p-2 mt-1"
             placeholder="e.g. 10"
-            value={minRepo}
-            onChange={(e) => setMinRepo(e.target.value)}
+            value={minRepos}
+            onChange={(e) => setMinRepos(e.target.value)}
           />
         </div>
 

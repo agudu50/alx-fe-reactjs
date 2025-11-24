@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchUserData = async (userName, location, minRepo) => {
+export const fetchUserData = async (userName, location, minRepos) => {
   // Build the search query dynamically
   let query = "";
 
@@ -15,8 +15,8 @@ export const fetchUserData = async (userName, location, minRepo) => {
   }
 
   // Minimum repositories
-  if (minRepo) {
-    query += `repos:>=${minRepo} `;
+  if (minRepos) {
+    query += `repos:>=${minRepos} `;
   }
 
   const url = `https://api.github.com/search/users?q=${encodeURIComponent(
