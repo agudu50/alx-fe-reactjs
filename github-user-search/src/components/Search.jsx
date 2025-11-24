@@ -6,22 +6,36 @@ function Search({ onSearch }) {
   const [location, setLocation] = useState("");
   const [minRepo, setMinRepo] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [noResults, setNoResults] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // use local API helper to perform advanced search
-    const items = await fetchUserData(userName, location, minRepo);
+    setLoading(true);
+    setNoResults(false);
 
-    // store search results (array) for local display
-    if (Array.isArray(items) && items.length > 0) {
-      setResults((prev) => [...items, ...prev]);
-    } else {
+    try {
+      // use local API helper to perform advanced search
+      const items = await fetchUserData(userName, location, minRepo);
+
+      // store search results (array) for local display
+      if (Array.isArray(items) && items.length > 0) {
+        setResults((prev) => [...items, ...prev]);
+        setNoResults(false);
+      } else {
+        setResults([]);
+        setNoResults(true);
+      }
+
+      // still notify parent if provided (preserve previous contract)
+      if (onSearch) onSearch({ userName, location, minRepo });
+    } catch (err) {
       setResults([]);
+      setNoResults(true);
+    } finally {
+      setLoading(false);
     }
-
-    // still notify parent if provided (preserve previous contract)
-    if (onSearch) onSearch({ userName, location, minRepo });
   };
 
   return (
@@ -74,13 +88,26 @@ function Search({ onSearch }) {
           Search
         </button>
       </form>
+      {/* Loading indicator */}
+      {loading && (
+        <div className="mt-6 text-center text-gray-600">Loading</div>
+      )}
+
+      {/* No results message (after a search) */}
+      {!loading && noResults && (
+        <div className="mt-6 text-center text-gray-600">Looks like we cant find the user</div>
+      )}
+
       {/* render results if any (uses && and map) */}
       {results.length > 0 && (
         <div className="mt-6 space-y-4">
           {results.map((r, idx) => (
-            <div key={idx} className="p-3 border rounded">
-              <p className="font-medium">{r.userName || r.login || 'Result'}</p>
-              <p className="text-sm text-gray-600">{r.location || r.html_url || ''}</p>
+            <div key={idx} className="p-3 border rounded flex items-center">
+              <img src={r.avatar_url} alt={`${r.userName || r.login}'s avatar`} className="w-12 h-12 rounded-full mr-3" />
+              <div>
+                <p className="font-medium">{r.userName || r.login || 'Result'}</p>
+                <p className="text-sm text-gray-600">{r.location || r.html_url || ''}</p>
+              </div>
             </div>
           ))}
         </div>
