@@ -7,13 +7,13 @@ function Search({ onSearch }) {
   const [minRepo, setMinRepo] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [noResults, setNoResults] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
-    setNoResults(false);
+    setSearched(false);
 
     try {
       // use local API helper to perform advanced search
@@ -22,17 +22,16 @@ function Search({ onSearch }) {
       // store search results (array) for local display
       if (Array.isArray(items) && items.length > 0) {
         setResults((prev) => [...items, ...prev]);
-        setNoResults(false);
       } else {
         setResults([]);
-        setNoResults(true);
       }
+      setSearched(true);
 
       // still notify parent if provided (preserve previous contract)
       if (onSearch) onSearch({ userName, location, minRepo });
     } catch (err) {
       setResults([]);
-      setNoResults(true);
+      setSearched(true);
     } finally {
       setLoading(false);
     }
@@ -93,8 +92,8 @@ function Search({ onSearch }) {
         <div className="mt-6 text-center text-gray-600">Loading</div>
       )}
 
-      {/* No results message (after a search) */}
-      {!loading && noResults && (
+      {/* No results message (only after a search with no hits) */}
+      {!loading && searched && results.length === 0 && (
         <div className="mt-6 text-center text-gray-600">Looks like we cant find the user</div>
       )}
 
