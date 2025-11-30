@@ -13,7 +13,7 @@ function UserProfile() {
             text-gray-800 
             transition-colors duration-300 ease-in-out
             hover:text-blue-800 my-4">John Doe</h1>
-      <p className= "mt-2 text-sm md:text-base text-gray-600 text-center">Developer at Example Co. Loves to write code and explore new technologies.</p>
+      <p className= "mt-2 text-sm md:text-base text-gray-600 text-center   hover:text-blue-500">Developer at Example Co. Loves to write code and explore new technologies.</p>
       </div>
        <button
           className="
