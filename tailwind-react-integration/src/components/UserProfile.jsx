@@ -3,8 +3,8 @@ function UserProfile() {
   return (
     
     <div className="user-profile">
-        <div className=" max-w-sm p-6 mx-auto bg-white rounded-xl shadow-md 
-      hover:shadow-xl transition-shadow duration-300 ease-in-out">
+        <div className=" max-w-sm mx-auto bg-gray-100 p-8 my-20 rounded-xl shadow-md 
+      hover:shadow-lg transition-shadow duration-300 ease-in-out">  
         <div className="flex flex-col items-center">
       <img src="https://via.placeholder.com/150" alt="User"   className="sm:w-24 sm:h-24 md:w-36 md:h-36 rounded-full object-cover mx-auto transition-transform duration-300 ease-in-out 
             hover:scale-110"/>
