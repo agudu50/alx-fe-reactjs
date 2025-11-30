@@ -6,7 +6,7 @@ function UserProfile() {
         <div className=" max-w-sm mx-auto bg-gray-100 p-8 my-20 rounded-xl shadow-md 
       hover:shadow-lg transition-shadow duration-300 ease-in-out">  
         <div className="flex flex-col items-center">
-      <img src="https://via.placeholder.com/150" alt="User"   className="sm:w-24 sm:h-24 md:w-36 md:h-36 rounded-full object-cover mx-auto transition-transform duration-300 ease-in-out 
+      <img src="https://via.placeholder.com/150" alt="User"   className="sm:w-24 sm:h-24 md:p-8 sm:p-4 md:w-36 md:h-36 rounded-full object-cover mx-auto transition-transform duration-300 ease-in-out 
             hover:scale-110"/>
       <h1 className="mt-4 font-bold 
             text-lg md:text-xl 
