@@ -7,7 +7,7 @@ const HomePage = () => {
 
   useEffect(() => {
     
-    fetch("/data.json")
+    fetch("../data.json")
       .then((res) => res.json())
       .then((data) => setRecipes(data))
       .catch((err) => console.error("Error loading recipes:", err));

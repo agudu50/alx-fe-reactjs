@@ -1,5 +1,4 @@
 import {useParams} from 'react-router-dom';
-import data from '../data.json';
 import {useState, useEffect} from 'react';
 
 
@@ -9,7 +8,7 @@ const RecipeDetail = () => {
     const [recipe, setRecipe] = useState(null);
 
     useEffect(() => {
-        fetch ("/data.json")
+        fetch ("../data.json")
         .then((res) => res.json())
         .then((data) => {
             const found = data.find((item) => item.id === parseInt (id));
