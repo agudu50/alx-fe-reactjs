@@ -1,4 +1,5 @@
 import {useParams} from 'react-router-dom';
+import data from '../data.json';
 import {useState, useEffect} from 'react';
 
 
