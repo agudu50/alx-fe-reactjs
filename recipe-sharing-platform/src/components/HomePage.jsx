@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "react-router-dom/Link";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    // Fetch JSON from public folder
+    
     fetch("/data.json")
       .then((res) => res.json())
       .then((data) => setRecipes(data))
