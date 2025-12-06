@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import data from "../data.json";
-import chickenImage from "../assets/chicken.jpg";
-import pastaImage from "../assets/pasta.jpg";
 
 const HomePage = () => {
     const [recipes, setRecipies] = useState([]);
@@ -12,7 +10,7 @@ const HomePage = () => {
 
     return (
         <div className="min-h-screen bg-gray-100 p-6">
-            <h1 className="text-3xl font-bold text-center mb-6">Recipe Sharing Platform</h1>
+            <h1 className="text-3xl font-bold text-center mb-6 text-cyan-800">Recipe Sharing Platform</h1>
 
             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {recipes.map((recipe) =>(
