@@ -2,6 +2,7 @@ import {useParams} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 
 
+
 const RecipeDetail = () => {
     const {id} = useParams();
     const [recipe, setRecipe] = useState(null);
@@ -9,7 +10,7 @@ const RecipeDetail = () => {
     useEffect(() => {
         fetch ("/data.json")
         .then((res) => res.json())
-        .then((date) => {
+        .then((data) => {
             const found = data.find((item) => item.id === parseInt (id));
             setRecipe(found);
         });
@@ -34,7 +35,7 @@ const RecipeDetail = () => {
             className="w-full rounded-lg shadow-md mb-6"/>
 
             {/* Ingredients */}
-            <div className= "bgwhite p-6 rounded-lg shadow mb-6">
+            <div className= "bg-white p-6 rounded-lg shadow mb-6">
                 <h2 className= "text-2xl font-semibold text-gray-700 mb-2">Ingredients</h2>
                 <ul className = "list-disc ml-6 text-gray-600">
                     {recipe.ingredients?.map((item, i) =>(
