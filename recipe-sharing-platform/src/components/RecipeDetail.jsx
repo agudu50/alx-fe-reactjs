@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import recipesData from "../data.json";
 
 
 
@@ -8,14 +9,11 @@ const RecipeDetail = () => {
     const [recipe, setRecipe] = useState(null);
 
     useEffect(() => {
-        fetch ("../data.json")
-        .then((res) => res.json())
-        .then((data) => {
-            const found = data.find((item) => item.id === parseInt (id));
-            setRecipe(found);
-        });
-        
-    }, [id]);
+    const found = recipesData.find(
+      (item) => item.id === parseInt(id)
+    );
+    setRecipe(found);
+  }, [id]);
 
     if (!recipe) {
         return <p className = "text-center text-gray-500">Loading...</p>;

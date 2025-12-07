@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import recipesData from "../data.json"; 
 
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
 
-  useEffect(() => {
-    
-    fetch("../data.json")
-      .then((res) => res.json())
-      .then((data) => setRecipes(data))
-      .catch((err) => console.error("Error loading recipes:", err));
+   useEffect(() => {
+    setRecipes(recipesData); // <-- No fetch needed
   }, []);
 
   return (
@@ -18,6 +15,13 @@ const HomePage = () => {
       <h1 className="text-3xl font-bold text-center mb-6 text-cyan-800">
         Recipe Sharing Platform
       </h1>
+
+      <Link to="/add-recipe">
+            <button className="mb-6 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
+                + Add New Recipe
+            </button>
+      </Link>
+
 
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
