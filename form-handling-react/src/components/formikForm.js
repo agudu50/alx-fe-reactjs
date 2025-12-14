@@ -4,21 +4,15 @@ import * as Yup from "yup";
 const FormikForm = () => {
   // Yup validation schema
   const validationSchema = Yup.object({
-    username: Yup.string()
-      .trim()
-      .required("Username is required"),
+    username: Yup.string().required("Username is required"),
 
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
+    email: Yup.string().required("Email is required").email("Invalid email format"),
 
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+    password: Yup.string().required("Password is required"),
 
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords do not match")
-      .required("Confirm password is required"),
+      .required("Confirm password is required")
+      .oneOf([Yup.ref("password")], "Passwords do not match"),
   });
 
   return (
@@ -41,31 +35,19 @@ const FormikForm = () => {
         <div>
           <label>Username:</label>
           <Field type="text" name="username" />
-          <ErrorMessage
-            name="username"
-            component="p"
-            style={{ color: "red" }}
-          />
+          <ErrorMessage name="username" component="p" style={{ color: "red" }} />
         </div>
 
         <div>
           <label>Email:</label>
           <Field type="email" name="email" />
-          <ErrorMessage
-            name="email"
-            component="p"
-            style={{ color: "red" }}
-          />
+          <ErrorMessage name="email" component="p" style={{ color: "red" }} />
         </div>
 
         <div>
           <label>Password:</label>
           <Field type="password" name="password" />
-          <ErrorMessage
-            name="password"
-            component="p"
-            style={{ color: "red" }}
-          />
+          <ErrorMessage name="password" component="p" style={{ color: "red" }} />
         </div>
 
         <div>
