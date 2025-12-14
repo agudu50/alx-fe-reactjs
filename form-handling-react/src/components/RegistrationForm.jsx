@@ -7,57 +7,56 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // State for validation message
-  const [error, setError] = useState("");
+  // State for validation errors
+  const [errors, setErrors] = useState({});
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Trim values for validation
-    const trimmedUsername = username.trim();
-    const trimmedEmail = email.trim();
-    const trimmedPassword = password.trim();
-    const trimmedConfirmedPassword = confirmPassword.trim();
+    let newErrors = {};
 
-    // Check empty fields
-    if (
-      !trimmedUsername ||
-      !trimmedEmail ||
-      !trimmedPassword ||
-      !trimmedConfirmedPassword
-    ) {
-      setError("All fields are required.");
+    // Basic validation logic (EXPLICIT checks)
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+
+    if (!email) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "Confirm password is required";
+    }
+
+    if (password && confirmPassword && password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    // Set errors
+    setErrors(newErrors);
+
+    // Stop submission if there are errors
+    if (Object.keys(newErrors).length > 0) {
       return;
     }
 
-    // Check password match
-    if (trimmedPassword !== trimmedConfirmedPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+    console.log({ username, email, password });
 
-    // Clear error if validation passes
-    setError("");
-
-    console.log({
-      username: trimmedUsername,
-      email: trimmedEmail,
-      password: trimmedPassword,
-    });
-
-    // Optional: clear form
+    // Clear form
     setUsername("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
+    setErrors({});
   };
 
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "auto" }}>
       <h2>User Registration Form</h2>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div>
         <label>Username:</label>
@@ -66,6 +65,7 @@ const RegistrationForm = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
       </div>
 
       <div>
@@ -75,6 +75,7 @@ const RegistrationForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       </div>
 
       <div>
@@ -84,6 +85,7 @@ const RegistrationForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </div>
 
       <div>
@@ -93,6 +95,9 @@ const RegistrationForm = () => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+        {errors.confirmPassword && (
+          <p style={{ color: "red" }}>{errors.confirmPassword}</p>
+        )}
       </div>
 
       <button type="submit">Register</button>
