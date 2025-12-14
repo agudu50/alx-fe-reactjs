@@ -4,6 +4,7 @@ import Profile from "./components/Profile.jsx";
 import ProfileDetails from "./pages/ProfileDetails.jsx";
 import ProfileSettings from "./components/ProfileSettings.jsx";
 import UserPost from "./components/UserPost.jsx";
+import BlogPost from "./pages/BlogPost.jsx"; // import BlogPost
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
@@ -24,7 +25,11 @@ function App() {
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
+
+        {/* Dynamic routing */}
         <Route path="/post/:postId" element={<UserPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+
         <Route path="*" element={<h2>Page Not Found</h2>} />
       </Routes>
     </BrowserRouter>
