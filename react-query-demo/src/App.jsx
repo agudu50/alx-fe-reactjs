@@ -1,16 +1,15 @@
-import { useState } from 'react'
-import PostsComponent from './components/PostsComponent'
-import './App.css'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PostsComponent from './components/PostsComponent';
+import './App.css';
+
+const queryClient = new QueryClient();
 
 function App() {
- 
-
   return (
-    <>
-     
-    <PostsComponent/>
-    </>
-  )
+    <QueryClientProvider client={queryClient}>
+      <PostsComponent />
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
