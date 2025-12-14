@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import Profile from "./pages/Profile.jsx";
+import Profile from "./components/Profile.jsx";
 import ProfileDetails from "./pages/ProfileDetails.jsx";
 import ProfileSettings from "./components/ProfileSettings.jsx";
 import UserPost from "./components/UserPost.jsx";
